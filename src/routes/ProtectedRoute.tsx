@@ -12,7 +12,7 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   if (status === "loading" || status === "idle") {
     return (
       <div className="flex justify-center items-center h-screen">
-        Cargando...
+        Loading...
       </div>
     );
   }

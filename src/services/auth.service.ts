@@ -1,25 +1,25 @@
 import type { LoginCredentials, User } from "@/types/User";
 
-// Define la estructura de la respuesta del login
+// Define the structure of the login response
 interface LoginResponse {
   user: User;
   token: string;
 }
 
 /**
- * Realiza la llamada a la API para iniciar sesión.
- * @param credentials - Credenciales de email y contraseña.
- * @returns Una promesa que resuelve con el usuario y el token.
+ * Realizes the login action by calling the authentication service.
+ * @param credentials - Email and password credentials.
+ * @returns A promise that resolves with the user and token.
  */
 const login = async (credentials: LoginCredentials): Promise<LoginResponse> => {
-  // Nota: En una aplicación real, el endpoint sería algo como '/auth/login'
-  // Para este ejemplo, simularemos una respuesta exitosa.
-  // Descomenta la siguiente línea para usar una API real:
+  // Note: In a real application, the endpoint would be something like '/auth/login'
+  // For this example, we'll simulate a successful response.
+  // Uncomment the following line to use a real API:
   // const { data } = await apiClient.post<LoginResponse>('/auth/login', credentials);
   // return data;
 
-  // --- Inicio de la simulación ---
-  console.log("Simulando llamada a la API de login con:", credentials);
+  // --- Start of simulation ---
+  console.log("Simulating API call to login with:", credentials);
   if (
     credentials.email === "test@example.com" &&
     credentials.password === "password"
@@ -35,11 +35,11 @@ const login = async (credentials: LoginCredentials): Promise<LoginResponse> => {
   } else {
     return new Promise((_, reject) => {
       setTimeout(() => {
-        reject(new Error("Credenciales inválidas"));
+        reject(new Error("Invalid credentials"));
       }, 1000);
     });
   }
-  // --- Fin de la simulación ---
+  // --- End of simulation ---
 };
 
 export const authService = {

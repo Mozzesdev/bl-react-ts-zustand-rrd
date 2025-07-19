@@ -30,7 +30,7 @@ const LoginPage = () => {
   return (
     <div className="flex items-center justify-center min-h-dvh">
       <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-2xl">
-        <h2 className="text-2xl font-bold text-center">Iniciar Sesión</h2>
+        <h2 className="text-2xl font-bold text-center">Login</h2>
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
             <label
@@ -55,7 +55,7 @@ const LoginPage = () => {
               htmlFor="password"
               className="block text-sm font-medium text-gray-700"
             >
-              Contraseña
+              Password
             </label>
             <input
               id="password"
@@ -75,7 +75,7 @@ const LoginPage = () => {
               disabled={status === "loading"}
               className="w-full px-4 py-2 font-semibold text-white bg-blue-600 rounded-md hover:bg-blue-700 disabled:bg-blue-300"
             >
-              {status === "loading" ? "Cargando..." : "Entrar"}
+              {status === "loading" ? "Loading..." : "Login"}
             </button>
           </div>
         </form>

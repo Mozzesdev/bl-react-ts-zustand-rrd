@@ -7,9 +7,9 @@ const DashboardPage = () => {
     <div>
       <h2 className="text-3xl font-bold mb-4">Dashboard</h2>
       <p>
-        Bienvenido, <span className="font-semibold">{user?.name ?? 'Usuario'}</span>!
+        Welcome, <span className="font-semibold">{user?.name ?? 'User'}</span>!
       </p>
-      <p>Esta es una ruta protegida.</p>
+      <p>This is a protected route.</p>
     </div>
   );
 };
