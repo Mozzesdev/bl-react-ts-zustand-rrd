@@ -1,9 +1,67 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppStore } from "@/store/store";
 
 const Header = () => {
-  const isMobileMenuOpen = useAppStore((state) => state.isMobileMenuOpen);
-  const toggleMobileMenu = useAppStore((state) => state.toggleMobileMenu);
+  const { status, logout, isMobileMenuOpen, toggleMobileMenu } = useAppStore();
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
+
+  const AuthNav = () => {
+    if (status === "authenticated") {
+      return (
+        <>
+          <Link to="/dashboard" className="text-gray-600 hover:text-blue-600">
+            Dashboard
+          </Link>
+          <button
+            onClick={handleLogout}
+            className="text-gray-600 hover:text-blue-600"
+          >
+            Logout
+          </button>
+        </>
+      );
+    }
+    return (
+      <Link to="/login" className="text-gray-600 hover:text-blue-600">
+        Login
+      </Link>
+    );
+  };
+
+  const AuthNavMobile = () => {
+    if (status === "authenticated") {
+      return (
+        <>
+          <Link
+            to="/dashboard"
+            className="block py-2 text-gray-600 hover:text-blue-600"
+          >
+            Dashboard
+          </Link>
+          <button
+            onClick={handleLogout}
+            className="block w-full text-left py-2 text-gray-600 hover:text-blue-600"
+          >
+            Logout
+          </button>
+        </>
+      );
+    }
+    return (
+      <Link
+        to="/login"
+        className="block py-2 text-gray-600 hover:text-blue-600"
+      >
+        Login
+      </Link>
+    );
+  };
 
   return (
     <header className="bg-white shadow-md">
@@ -11,13 +69,11 @@ const Header = () => {
         <Link to="/" className="text-xl font-bold text-blue-600">
           My App
         </Link>
-        <nav className="hidden md:flex space-x-4">
-          <Link to="/" className="text-gray-600 hover:text-blue-600">
-            Home
-          </Link>
+        <nav className="hidden md:flex items-center space-x-4">
           <Link to="/about" className="text-gray-600 hover:text-blue-600">
             About
           </Link>
+          <AuthNav />
         </nav>
         <div className="md:hidden">
           <button
@@ -43,15 +99,13 @@ const Header = () => {
       </div>
       {isMobileMenuOpen && (
         <div className="md:hidden bg-white px-4 pt-2 pb-4">
-          <Link to="/" className="block py-2 text-gray-600 hover:text-blue-600">
-            Home
-          </Link>
           <Link
             to="/about"
             className="block py-2 text-gray-600 hover:text-blue-600"
           >
             About
           </Link>
+          <AuthNavMobile />
         </div>
       )}
     </header>

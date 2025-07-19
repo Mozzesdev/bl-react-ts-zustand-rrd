@@ -8,3 +8,5 @@ export const useAppStore = create<AppState>()((...a) => ({
   ...createUiSlice(...a),
   ...createAuthSlice(...a),
 }));
+
+useAppStore.getState().initializeAuth();

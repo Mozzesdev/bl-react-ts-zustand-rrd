@@ -1,69 +1,92 @@
-# React + TypeScript + Vite
+# Boilerplate Moderno: React, Vite, TypeScript, Zustand y Tailwind CSS
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este es un boilerplate robusto y listo para producción construido con un stack tecnológico moderno, diseñado para un desarrollo rápido, escalable y con una excelente experiencia para el desarrollador.
 
-Currently, two official plugins are available:
+## ✨ Características
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Framework**: React 19
+- **Bundler**: Vite
+- **Lenguaje**: TypeScript
+- **Gestión de Estado**: Zustand (con patrón de slices)
+- **Enrutamiento**: React Router DOM
+- **Estilos**: Tailwind CSS 4
+- **Cliente HTTP**: Axios (con interceptores para tokens y errores)
+- **Linting**: ESLint
+- **Testing**: Vitest y React Testing Library
 
-## Expanding the ESLint configuration
+## 🚀 Cómo Empezar
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Prerrequisitos
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Node.js (v18 o superior)
+- pnpm (o puedes usar npm/yarn)
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### Instalación
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1.  **Clona el repositorio** (o usa este boilerplate):
+    ```bash
+    git clone <tu-repositorio>
+    cd <tu-repositorio>
+    ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2.  **Instala las dependencias**:
+    ```bash
+    pnpm install
+    ```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+3.  **Configura las variables de entorno**:
+    Copia el archivo `.env.example` a un nuevo archivo llamado `.env` y ajusta la URL de la API si es necesario.
+    ```bash
+    cp .env.example .env
+    ```
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+4.  **Ejecuta el servidor de desarrollo**:
+    ```bash
+    pnpm dev
+    ```
+    La aplicación estará disponible en `http://localhost:5173`.
+
+## Scripts Disponibles
+
+- `pnpm dev`: Inicia el servidor de desarrollo.
+- `pnpm build`: Compila la aplicación para producción.
+- `pnpm lint`: Ejecuta el linter para revisar el código.
+- `pnpm test`: Ejecuta las pruebas.
+- `pnpm preview`: Previsualiza la build de producción localmente.
+
+## 🏛️ Estructura del Proyecto
+
+
+src
+├── components         # Componentes reutilizables (UI)
+│   ├── common         # Componentes genéricos (botones, inputs, etc.)
+│   └── layout         # Componentes de estructura (Header, Footer, Layout)
+├── lib                # Librerías y clientes externos (ej. apiClient)
+├── pages              # Componentes que representan páginas/rutas
+├── routes             # Configuración de enrutamiento
+├── services           # Lógica de negocio y llamadas a la API
+├── store              # Gestión de estado global (Zustand)
+│   └── slices         # Divisiones del store por funcionalidad
+├── test               # Configuración y archivos de testing
+├── types              # Definiciones de tipos de TypeScript
+├── App.tsx            # Componente raíz de la aplicación
+├── main.tsx           # Punto de entrada de la aplicación
+└── index.css          # Estilos globales
+
+
+## 🔑 Autenticación
+
+El boilerplate incluye un flujo de autenticación completo:
+
+- **Estado de Autenticación**: Gestionado con Zustand en `store/slices/auth.slice.ts`.
+- **Persistencia**: El token de sesión se guarda en `localStorage` para mantener al usuario autenticado entre visitas.
+- **Rutas Protegidas**: El componente `routes/ProtectedRoute.tsx` restringe el acceso a ciertas rutas solo para usuarios autenticados.
+- **Página de Login**: Un formulario de ejemplo en `pages/LoginPage.tsx`.
+- **Simulación de API**: El archivo `services/auth.service.ts` simula una API de login para que puedas probar el flujo sin un backend real.
+
+## ✅ Testing
+
+La configuración de testing está lista para usar con **Vitest** y **React Testing Library**.
+
+- **Configuración**: Definida en `vite.config.ts` y `src/test/setup.ts`.
+- **Para crear una prueba**: Crea un archivo con la extensión `.test.tsx` (ej. `MiComponente.test.tsx`) dentro de la misma carpeta que el componente que quieres probar.
